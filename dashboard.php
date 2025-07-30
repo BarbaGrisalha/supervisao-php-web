@@ -22,15 +22,7 @@ $tempData = [rand(20, 90), rand(20, 90), rand(20, 90), rand(20, 90), rand(20, 90
     <title>Painel de Supervisão</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            background: #f8f9fa;
-        }
-
-        .card {
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -80,51 +72,11 @@ $tempData = [rand(20, 90), rand(20, 90), rand(20, 90), rand(20, 90), rand(20, 90
         <canvas id="tempChart" height="100"></canvas>
     </div>
 
-    <!-- Scripts JS -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Atualiza relógio
-            function updatedClock() {
-                const now = new Date();
-                const clock = document.getElementById("clock");
-                if (clock) {
-                    clock.textContent = now.toLocaleTimeString();
-                }
-            }
-
-            updatedClock();
-            setInterval(updatedClock, 1000);
-
-            // Atualiza página a cada 5 segundos
-            setTimeout(() => {
-                window.location.reload();
-            }, 5000);
-
-            // Gráfico Chart.js
-            const tempChart = new Chart(document.getElementById('tempChart'), {
-                type: 'line',
-                data: {
-                    labels: ['T1', 'T2', 'T3', 'T4', 'T5'],
-                    datasets: [{
-                        label: 'Temperatura',
-                        data: <?= json_encode($tempData) ?>,
-                        borderColor: 'red',
-                        backgroundColor: 'rgba(255,0,0,0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true
-                        }
-                    }
-                }
-            });
-        });
+        window.tempData = <?= json_encode($tempData) ?>;
     </script>
+    
+    <script src="assets/js/chart-handler.js"></script>
 
 </body>
 
